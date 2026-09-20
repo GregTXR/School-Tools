@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Calculadora de Presença para estudantes que desejam calcular o percentual de presença e a recuperação de períodos necessária."
+        />
+        <meta
+            name="keywords"
+            content="Calculadora, Escola, Presença, Frequency Calculator, Estudantes"
+        />
+        <meta name="author" content="GregSaid" />
+        <title>Frequency Calculator</title>
+        <link rel="shortcut icon" href="../ico/Tool.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="../Code/CSS/Frequency Calculator.css" />
+        <script src="../Code/JS/Frequency Calculator.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="close-btn">
+                <a href="../index.html">
+                    <img src="../Code/CSS/img/Icons/Close.png" alt="Close" />
+                </a>
+            </div>
+
+            <h1>Calculadora de frequência</h1>
+            <form id="presencaForm">
+                <label for="total-aulas">Número total de aulas:</label>
+                <input
+                    type="number"
+                    id="total-aulas"
+                    inputmode="numeric"
+                    required
+                    oninput="validarNumerosInteiros(this); atualizarPresencas(); OcultarAprovado(); OcultarResultado();"
+                    onkeypress="return CheckChar(event)"
+                />
+
+                <label for="presencas">Número total de presenças:</label>
+                <input
+                    type="number"
+                    id="presencas"
+                    inputmode="numeric"
+                    required
+                    oninput="validarNumerosInteiros(this); validarPresencas(); OcultarAprovado(); OcultarResultado();"
+                    onkeypress="return CheckChar(event)"
+                />
+
+                <label for="percentual-minimo"
+                    >Percentual mínimo de presença:</label
+                >
+                <input
+                    type="number"
+                    id="percentual-minimo"
+                    inputmode="numeric"
+                    required
+                    oninput="LimitarNumeros(this); validarvalorMaximo(this); OcultarAprovado(); OcultarResultado();"
+                    onkeypress="return CheckChar(event)"
+                />
+
+                <button type="button" onclick="calcular()">Calcular</button>
+            </form>
+
+            <p id="erro" class="erro"></p>
+            <h2 id="resultado" class="resultado"></h2>
+        </div>
+    </body>
+</html>
