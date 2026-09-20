@@ -105,7 +105,7 @@ function calcular() {
         const simulacao = calcularPeriodosParaRecuperar(totalAulas, presencas, percentualMinimo);
 
         if (simulacao.inatingivel) {
-            htmlResultado += `<p id="Small"><strong>Warning:</strong> it is not possible to reach ${percentualMinimo}% within the simulated period.</p>`;
+            htmlResultado += `<p id="Small"><strong>Warning:</strong> it is not possible to reach ${percentualMinimo}% (Failed: more than 365 days to recover).</p>`;
             MostrarInatingivel(); // activates the persistent red state (no timeout)
         } else {
             htmlResultado +=
