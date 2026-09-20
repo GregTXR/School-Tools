@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
             name="description"
-            content="Calculadora de Presença para estudantes que desejam calcular o percentual de presença e a recuperação de períodos necessária."
+            content="Attendance Calculator for students who want to calculate their attendance percentage and the recovery periods needed."
         />
         <meta
             name="keywords"
-            content="Calculadora, Escola, Presença, Frequency Calculator, Estudantes"
+            content="Calculator, School, Attendance, Frequency Calculator, Students"
         />
         <meta name="author" content="GregSaid" />
         <title>Frequency Calculator</title>
@@ -26,9 +26,9 @@
                 </a>
             </div>
 
-            <h1>Calculadora de frequência</h1>
+            <h1>Attendance Calculator</h1>
             <form id="presencaForm">
-                <label for="total-aulas">Número total de aulas:</label>
+                <label for="total-aulas">Total number of classes:</label>
                 <input
                     type="number"
                     id="total-aulas"
@@ -38,7 +38,7 @@
                     onkeypress="return CheckChar(event)"
                 />
 
-                <label for="presencas">Número total de presenças:</label>
+                <label for="presencas">Total number of classes attended:</label>
                 <input
                     type="number"
                     id="presencas"
@@ -49,7 +49,7 @@
                 />
 
                 <label for="percentual-minimo"
-                    >Percentual mínimo de presença:</label
+                    >Minimum required attendance percentage:</label
                 >
                 <input
                     type="number"
@@ -60,7 +60,7 @@
                     onkeypress="return CheckChar(event)"
                 />
 
-                <button type="button" onclick="calcular()">Calcular</button>
+                <button type="button" onclick="calcular()">Calculate</button>
             </form>
 
             <p id="erro" class="erro"></p>

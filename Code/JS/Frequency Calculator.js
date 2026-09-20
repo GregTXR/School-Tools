@@ -76,7 +76,7 @@ function calcularPeriodosParaRecuperar(
 }
 
 // ======================================================
-// FUNÇÃO PRINCIPAL
+// MAIN FUNCTION
 // ======================================================
 function calcular() {
     const totalAulas = parseInt(document.getElementById('total-aulas').value, 10);
@@ -84,13 +84,13 @@ function calcular() {
     const percentualMinimo = parseFloat(document.getElementById('percentual-minimo').value.replace(',', '.'));
 
     OcultarAprovado();
-    OcultarInatingivel(); // limpa o estado "inatingível" antes de recalcular
+    OcultarInatingivel(); // clear the "unreachable" state before recalculating
 
     if (
         isNaN(totalAulas) || isNaN(presencas) || isNaN(percentualMinimo) ||
         totalAulas <= 0 || presencas < 0 || percentualMinimo <= 0 || percentualMinimo > 100
     ) {
-        ExibirErro('Por favor, insira valores válidos.');
+        ExibirErro('Please enter valid values.');
         document.getElementById('resultado').innerText = '';
         return;
     }
@@ -99,18 +99,18 @@ function calcular() {
     const aprovado = percentualPresenca >= percentualMinimo;
 
     const resultadoDiv = document.getElementById('resultado');
-    let htmlResultado = `<p><strong>Presença:</strong> ${percentualPresenca.toFixed(2)}%</p>`;
+    let htmlResultado = `<p><strong>Attendance:</strong> ${percentualPresenca.toFixed(2)}%</p>`;
 
     if (!aprovado) {
         const simulacao = calcularPeriodosParaRecuperar(totalAulas, presencas, percentualMinimo);
 
         if (simulacao.inatingivel) {
-            htmlResultado += `<p id="Small"><strong>Atenção:</strong> não é possível atingir ${percentualMinimo}% dentro do período simulado.</p>`;
-            MostrarInatingivel(); // ativa o vermelho persistente (sem timeout)
+            htmlResultado += `<p id="Small"><strong>Warning:</strong> it is not possible to reach ${percentualMinimo}% within the simulated period.</p>`;
+            MostrarInatingivel(); // activates the persistent red state (no timeout)
         } else {
             htmlResultado +=
-                `<p id="Small"><strong>Períodos necessários:</strong> ${simulacao.periodosNecessarios}</p>` +
-                `<p id="Small"><strong>Dias necessários:</strong> ${simulacao.diasNecessarios}</p>`;
+                `<p id="Small"><strong>Periods needed:</strong> ${simulacao.periodosNecessarios}</p>` +
+                `<p id="Small"><strong>Days needed:</strong> ${simulacao.diasNecessarios}</p>`;
         }
     }
 
@@ -223,11 +223,11 @@ function validarvalorMaximo(campo) {
     let valor = parseFloat(campo.value.replace(',', '.'));
     if (valor < 0) {
         campo.value = '';
-        ExibirErro('Frequência não pode ser negativa. Corrigida para 0.');
+        ExibirErro('Attendance cannot be negative. Corrected to 0.');
     } else if (valor > maxvalor) {
         campo.value = maxvalor;
         ExibirErro(
-            `Frequência corrigida para o máximo permitido de ${maxvalor}.`
+            `Attendance corrected to the maximum allowed value of ${maxvalor}.`
         );
     } else {
         OcultarErro();
@@ -256,7 +256,7 @@ function validarPresencas() {
     const presencas = parseInt(document.getElementById('presencas').value, 10);
     if (!isNaN(totalAulas) && !isNaN(presencas) && presencas > totalAulas) {
         ExibirErro(
-            'O número de presenças não pode ser maior que o número total de aulas.'
+            'The number of classes attended cannot be greater than the total number of classes.'
         );
         document.getElementById('presencas').value = totalAulas;
     } else {

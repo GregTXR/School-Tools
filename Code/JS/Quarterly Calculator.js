@@ -1,8 +1,8 @@
 function calcularNotas() {
-    ocultarResultado(); // Limpa resultados anteriores
+    ocultarResultado(); // Clears previous results
     OcultarAprovado();
 
-    // Converte valores do formulário para pontos e depois para números
+    // Converts form values to points, then to numbers
     var nota1 = parseFloat(
         document.getElementById('nota1').value.replace(',', '.')
     );
@@ -14,14 +14,14 @@ function calcularNotas() {
     );
 
     if (isNaN(nota1) || isNaN(nota2) || isNaN(nota3)) {
-        ExibirErro('Por favor, insira valores válidos.');
+        ExibirErro('Please enter valid values.');
         document.getElementById('resultado').innerText = '';
         return;
     }
 
     var resultado = (nota1 * 3 + nota2 * 3 + nota3 * 4) / 10;
 
-    var status = resultado >= 6 ? 'Aprovado!' : 'Reprovado.';
+    var status = resultado >= 6 ? 'Passed!' : 'Failed.';
     var statusClass = resultado >= 6 ? 'aprovado' : 'reprovado';
 
     if (resultado >= 6 && !AprovadoBool) {
@@ -30,7 +30,7 @@ function calcularNotas() {
         OcultarAprovado();
     }
 
-    document.getElementById('resultado').innerText = `Resultado: ${resultado
+    document.getElementById('resultado').innerText = `Result: ${resultado
         .toFixed(2)
         .replace(',', '.')}\n${status}`;
     document.getElementById('resultado').className = 'resultado ' + statusClass;
@@ -41,22 +41,22 @@ function LimitarNumeros(campo, maxDigitos, MaxDecimais) {
 
     valor = valor.replace(',', '.');
 
-    // Verifica se o valor já contém um ponto decimal
+    // Checks whether the value already contains a decimal point
     let partes = valor.split('.');
     if (partes.length > 2) {
-        // Se houver mais de um ponto decimal, remova os extras
+        // If there is more than one decimal point, remove the extras
         valor = partes.shift() + '.' + partes.join('');
         campo.value = valor;
     }
 
-    // Limita o número de dígitos decimais a 1
+    // Limits the number of decimal digits
     if (partes[1] && partes[1].length > MaxDecimais) {
         partes[1] = partes[1].slice(0, MaxDecimais);
         valor = partes.join('.');
         campo.value = valor;
     }
 
-    // Limita o comprimento total do valor (contando ponto decimal)
+    // Limits the total length of the value (counting the decimal point)
     if (valor.length > maxDigitos) {
         campo.value = valor.slice(0, maxDigitos);
     }
@@ -66,10 +66,10 @@ function validarvalorMaximo(campo, maxvalor) {
     let valor = parseFloat(campo.value.replace(',', '.'));
     if (valor < 0) {
         campo.value = '';
-        ExibirErro('Nota não pode ser negativa. Corrigida para 0.');
+        ExibirErro('Grade cannot be negative. Corrected to 0.');
     } else if (valor > maxvalor) {
         campo.value = maxvalor;
-        ExibirErro(`Não é possivel colocar notas maiores que ${maxvalor}!!!`);
+        ExibirErro(`Grades higher than ${maxvalor} are not allowed!!!`);
     } else {
         document.getElementById('erro').innerText = '';
         OcultarErro();
@@ -79,22 +79,22 @@ function validarvalorMaximo(campo, maxvalor) {
 function CheckChar(e) {
     const char = e.key;
 
-    // Permite apenas números
+    // Allows only digits
     if (/[\d]/.test(char)) {
-        return true; // Aceita números
+        return true; // Accepts digits
     }
 
-    // Permite a vírgula ou ponto apenas se o input já contém um número
+    // Allows a comma or period only if the input already contains a digit
     const input = e.target.value;
     if (
         (char === ',' || char === '.') &&
         input.length > 0 &&
         /\d/.test(input)
     ) {
-        return true; // Aceita vírgula ou ponto se já houver um número
+        return true; // Accepts comma or period if a digit is already present
     }
 
-    // Previne a entrada de qualquer outro caractere
+    // Prevents entering any other character
     e.preventDefault();
     return false;
 }
@@ -148,11 +148,11 @@ function ExibirErro(mensagem) {
     document.querySelector('.container').classList.add('red');
     document.querySelector('button').classList.add('red');
 
-    // Ocultar erro automaticamente após 5 segundos
+    // Automatically hides the error after 5 seconds
     setTimeout(() => {
         OcultarErro();
-        erroBloqueado = false; // Libera a função
-    }, 5000); // 5000 ms = 5 segundos
+        erroBloqueado = false; // Releases the function
+    }, 5000); // 5000 ms = 5 seconds
 }
 
 function OcultarErro(mensagem) {
